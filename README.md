@@ -66,8 +66,21 @@ Conversion to float32 data type
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 ```
-Normalising input data to the range [0,1]
+[Normalising/Feature scaling](https://www.coursera.org/learn/machine-learning/lecture/xx3Da/gradient-descent-in-practice-i-feature-scaling) input data for getting all our data in a similar range (i.e [0,1]).It helps in faster convergence of model
 ```python
 X_train /= 255
 X_test /= 255
 ```
+For classification of digits, we need 10 classes ranging from 0-9. So, our output set must contain such labels.We can check present shape of our output and even print first 10 of them using 
+```python
+print y_train.shape
+print y_test.shape[:10] 
+```
+So we need to convert 1-dimensional class arrays to 10-dimensional class matrices
+```python
+Y_train = np_utils.to_categorical(y_train, 10) 
+Y_test = np_utils.to_categorical(y_test, 10)
+print y_test.shape
+```
+So our data is now dicided into 10 classes.
+## NETWORK CONSTRUCTION
