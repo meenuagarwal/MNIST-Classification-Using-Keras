@@ -18,7 +18,9 @@ The core data structure of Keras is a model, a way to organize layers. The simpl
 from keras.layers import Dense, Dropout, Activation, Flatten  
 from keras.layers import Convolution2D, MaxPooling2D
 ```
-Now we are importing core layers for our CNN netwrok.Dense layer is actually a [fully-connected layer](http://cs231n.github.io/convolutional-networks/#fc).[Dropout](https://en.wikipedia.org/wiki/Dropout_(neural_networks)) is a regularization technique used for reducing overfitting by randomly dropping output units in the network.Activation Function is used for introducing
+Now we are importing core layers for our CNN netwrok.Dense layer is actually a [fully-connected layer](http://cs231n.github.io/convolutional-networks/#fc).
+
+[Dropout](https://en.wikipedia.org/wiki/Dropout_(neural_networks)) is a regularization technique used for reducing overfitting by randomly dropping output units in the network.Activation Function is used for introducing
 non-linearity and Flatten is used for converting output matrices into a vector.
 
 The second line is used for importing convolutional and pooling layers.
@@ -30,3 +32,42 @@ This library will be useful for converting shape of our data.
 from keras.datasets import mnist
 ```
 MNIST dataset is already available in keras library.So, you dont need to download it separately.
+## LOAD DATA
+MNIST datset cosists of 28x28 size images of handwritten digits.We will load pre-shuffled data into training  and testing  sets.
+```python
+(X_train, y_train), (X_test, y_test) = mnist.load_data() 
+```
+We can plot and see any image(let's say the first image)
+```python
+plt.imshow(X_train[0])
+plt.show()
+```
+We need to reshape our data to include number of channels(i.e depth).Since we have grayscal images, no. of channels is equal to 1(for RGB, it is 3).The present shape of our data is (N,H,W) where N = total number of examples or batch size while H and W refer to height and width of the image respectively. Now reshaping will depend on which library your keras is build on:-
+
+- For theano, the format is (N,C,H,W)
+```python
+X_train = X_train.reshape(X_train.shape[0],1, 28, 28) 
+X_test = X_test.reshape(X_test.shape[0],1, 28, 28)
+```
+- For tensorflow, the format is (N,H,W,C)
+```python
+X_train = X_train.reshape(X_train.shape[0],28, 28, 1) 
+X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
+```
+where C means number of channels.
+
+We can now check the shape of our input using the following command
+```python
+print X_train.shape 
+#(60000,28,28,1)
+```
+Conversion to float32 data type
+```python
+X_train = X_train.astype('float32')
+X_test = X_test.astype('float32')
+```
+Normalising input data to the range [0,1]
+```python
+X_train /= 255
+X_test /= 255
+```
