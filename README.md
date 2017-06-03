@@ -1,2 +1,2 @@
 # deep_Learning
-Implementation of cnn 
+Using CNN for classification of mnist data
