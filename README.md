@@ -88,7 +88,22 @@ Let's start the construction of our model.
 ```python
 model = Sequential()
 ```
-Now we will add our first convulation layer with 32 kernels of sixe 3x3. The default stride value is (1,1).The activation function used is ReLu.Our input sample must be fed in (depth,width,height) format
+Now we will add our first convulation layer with 32 kernels of sixe 3x3. The default stride value is (1,1).The activation function used is [ReLu](http://cs231n.github.io/neural-networks-1/#actfun).Our input sample must be fed in (depth,width,height) format
 ```python
 model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(28,28,1)))
+```
+Now we can check the shape of our output from this layer.
+```python
+ model.output_shape
+ #(32,26,26)
+ ```
+Let's add more layers. Note that we need to define the shape of our input layer for only the first convolution layer.
+We are adding another convolution layer with 32 kernels of the same size as before with same activation function.
+Next we add a pooling layer which is used for downsampling as well as making our model somewhat translation invariant.
+The last layer is dropout.It is used for regularisation by randomly disabling/dropping neurons during learning phase.
+
+```python 
+model.add(Convolution2D(32, (3, 3), activation='relu'))
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Dropout(0.25))
 ```
