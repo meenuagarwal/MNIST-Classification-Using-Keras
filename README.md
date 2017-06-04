@@ -82,5 +82,13 @@ Y_train = np_utils.to_categorical(y_train, 10)
 Y_test = np_utils.to_categorical(y_test, 10)
 print y_test.shape
 ```
-So our data is now dicided into 10 classes.
+So our data is now divided into 10 classes.
 ## NETWORK CONSTRUCTION
+Let's start the construction of our model.
+```python
+model = Sequential()
+```
+Now we will add our first convulation layer with 32 kernels of sixe 3x3. The default stride value is (1,1).The activation function used is ReLu.Our input sample must be fed in (depth,width,height) format
+```python
+model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(28,28,1)))
+```
