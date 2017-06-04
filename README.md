@@ -88,7 +88,7 @@ Let's start the construction of our model.
 ```python
 model = Sequential()
 ```
-Now we will add our first convulation layer with 32 kernels of sixe 3x3. The default stride value is (1,1).The activation function used is [ReLu](http://cs231n.github.io/neural-networks-1/#actfun).Our input sample must be fed in (depth,width,height) format
+Now we will add our first convulation layer with 32 kernels of sixe 3x3. The default stride value is (1,1).The activation function used is [ReLu](http://cs231n.github.io/neural-networks-1/#actfun) which is defined as max(x,0).Hence,it sets the negative elements to zero..Our input sample must be fed in (depth,width,height) format
 ```python
 model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(28,28,1)))
 ```
